@@ -1,0 +1,62 @@
+.container{
+  background-color:darkkhaki    ;
+  color: aliceblue;
+  padding: 15px;
+  text-align: center;
+  font-size: 25px;
+  height: 550px;
+}
+
+.typing{
+  font-size: 22px;
+  height: 40px;
+  width: 500px;
+  text-align: center;
+  margin: 40px;
+  border-radius: 40px;
+  /* margin-left: 220px; */
+  
+  
+ 
+}
+
+.button{
+margin-bottom : 10px;
+
+
+  
+}
+
+.addup{
+  box-shadow: 3px 3px 20px rgba(0,0,0,0.3);
+  padding-bottom: 3px;
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-top: 20px;
+  background-color: blueviolet  ;
+  
+}
+
+.title{
+  background-color: blueviolet;
+  
+  margin-left: 300px;
+  margin-right: 300px;
+}
+
+.btn1{
+  
+  margin-right: 40px;
+  margin-left: 300px;
+  
+}
+
+.mytodos{
+  margin-right: 300px;
+  margin-left: 300px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  
+  padding-right: 40%;
+  background-color: brown;
+}
