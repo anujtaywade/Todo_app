@@ -15,9 +15,10 @@ const Navbar = () => {
   }
 
   let handleAdd=()=>{
-    settodo([...todo ,{todo, iscompleted:false}])
-    settodo("")
-    console.log(todos )
+    let updatedtodos=([...todos ,{todo, iscompleted:false}])
+    settodos(updatedtodos)
+    settodo("");
+    console.log(updatedtodos)
   }
 
   let handleRemove=()=>{
@@ -30,12 +31,12 @@ const Navbar = () => {
         <div className="title">Todo App</div>
 
         <div className="addup">
-          <input 
+          <input onChange={handleChange}
             type="text"
             
             name="text"
             value={todo}
-            onChange={handleChange}
+            
             placeholder="Enter Title"
             className="typing"
              
@@ -51,12 +52,14 @@ const Navbar = () => {
             
             return<div >
           
-          <button onClick={handleEdit} className="btn1">Edit</button>
-          <div className={item.iscompleted ?"": "line-through"}>{item.todo} 
-          <button onClick={handleRemove} className="btn2">Remove </button>
-        
+          <div className="btns">
+          <button onClick={handleEdit} >Edit</button>
+          <button onClick={handleRemove} >Remove </button>
+          <div className="printedTodo" >{item.todo} </div>
+          </div>
+          
 
-        </div>
+        
         
         </div>  
             })}
