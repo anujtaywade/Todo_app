@@ -47,8 +47,12 @@ margin-bottom : 10px;
 .btn1{
   
   margin-right: 40px;
-  margin-left: 300px;
+  margin-left: 530px;
   
+}
+
+.btn2{
+
 }
 
 .mytodos{
@@ -63,13 +67,10 @@ margin-bottom : 10px;
 }
 
 .printedTodo{
-  padding-left: 300px;
+  padding-left: 363px;
   padding-right: 300px;
   text-align: start;
   color: black;
   padding-bottom: 10px;
-}
-
-.btns{
   
 }

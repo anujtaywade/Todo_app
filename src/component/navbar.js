@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-
+import { v4 as uuidv4 } from 'uuid';
 const Navbar = () => {
   const [change, setchange] = useState({ name: "" });
   let handleChange = (e) => {
@@ -15,14 +15,22 @@ const Navbar = () => {
   }
 
   let handleAdd=()=>{
-    let updatedtodos=([...todos ,{todo, iscompleted:false}])
+    let updatedtodos=([...todos ,{id:uuidv4(),todo, iscompleted:false}])
     settodos(updatedtodos)
     settodo("");
     console.log(updatedtodos)
   }
 
-  let handleRemove=()=>{
-
+  let handleRemove=(id)=>{
+    let content=todos.findIndex(item=>{
+      return item.id ===id;
+      
+    })
+    let newTodos = todos.filter(item=>{
+      return item.id!==id
+    })
+    settodos(newTodos)
+    alert(`Do you really want to remove this todo ${newTodos}`)
   }
   
   return (
@@ -53,8 +61,8 @@ const Navbar = () => {
             return<div >
           
           <div className="btns">
-          <button onClick={handleEdit} >Edit</button>
-          <button onClick={handleRemove} >Remove </button>
+          <button onClick={handleEdit} className="btn1" >Edit</button>
+          <button onClick={()=>{handleRemove(item.id)}} className="btn2">Remove </button>
           <div className="printedTodo" >{item.todo} </div>
           </div>
           
