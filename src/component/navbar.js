@@ -10,11 +10,18 @@ const Navbar = () => {
   const [todo, settodo] = useState("");
   const [todos, settodos] = useState([]);
 
-  let handleEdit=()=>{
-
+  let handleEdit=(e,id)=>{
+    let t =todos.find((i)=>i.id===id)
+    settodos(t[0].todo)
+    
   }
 
   let handleAdd=()=>{
+    if(todo.trim()===""){
+      alert("todos can't be empty")
+      return;
+    }
+    
     let updatedtodos=([...todos ,{id:uuidv4(),todo, iscompleted:false}])
     settodos(updatedtodos)
     settodo("");
@@ -22,7 +29,7 @@ const Navbar = () => {
   }
 
   let handleRemove=(id)=>{
-    let content=todos.findIndex(item=>{
+      todos.findIndex(item=>{
       return item.id ===id;
       
     })
@@ -55,15 +62,20 @@ const Navbar = () => {
         </div>
         
         <div>
+        
           <div className="mytodos">My Todos</div>
+          
           {todos.map(item=>{
-            
+          
             return<div >
           
           <div className="btns">
-          <button onClick={handleEdit} className="btn1" >Edit</button>
+          <button onClick={(e)=>handleEdit(e,item.id)} className="btn1" >Edit</button>
           <button onClick={()=>{handleRemove(item.id)}} className="btn2">Remove </button>
-          <div className="printedTodo" >{item.todo} </div>
+          <div className="printedTodo" >{item.todo} 
+          
+          </div>
+          
           </div>
           
 
