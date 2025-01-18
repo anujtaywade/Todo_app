@@ -1,4 +1,4 @@
-import React from "react";
+import React, {  useEffect } from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 const Navbar = () => {
@@ -9,36 +9,66 @@ const Navbar = () => {
 
   const [todo, settodo] = useState("");
   const [todos, settodos] = useState([]);
+  const [editTab, seteditTab] = useState(null);
+
+  useEffect(() => {
+    let todos = JSON.parse(localStorage.setItem("todos"))
+    settodo(todos)
+  }, []);  
+  
+  let savetoLS = localStorage.setItem("todos",JSON.stringify(todos))
 
   let handleEdit=(e,id)=>{
-    let t =todos.find((i)=>i.id===id)
-    settodos(t[0].todo)
     
+        let t =todos.find((i)=>i.id===id)
+      if(t){
+        settodo(t.todo)
+       seteditTab(id)
+    
+      } 
+     
   }
+  savetoLS()
 
   let handleAdd=()=>{
     if(todo.trim()===""){
       alert("todos can't be empty")
       return;
     }
+   
     
-    let updatedtodos=([...todos ,{id:uuidv4(),todo, iscompleted:false}])
-    settodos(updatedtodos)
-    settodo("");
-    console.log(updatedtodos)
-  }
+    if(editTab!==null){
+    let updatedtodos=todos.map((item)=>
+          item.id===editTab?{...item,todo}:item
+        )
+        settodos(updatedtodos)
+        seteditTab(null);
+        console.log(updatedtodos)
+    } 
+
+     else {
+      let newTodo = { id: uuidv4(), todo, isCompleted: false };
+      settodos([...todos, newTodo]);
+    }
+   settodo("")
+  };
+  savetoLS()
 
   let handleRemove=(id)=>{
       todos.findIndex(item=>{
       return item.id ===id;
       
     })
-    let newTodos = todos.filter(item=>{
-      return item.id!==id
-    })
-    settodos(newTodos)
-    alert(`Do you really want to remove this todo ${newTodos}`)
-  }
+    let confirm=window.confirm("do you really want to delete this todo")
+    if(confirm){
+      let finalTodoos=todos.filter((item)=>item.id!==id);
+      settodos(finalTodoos)
+    
+    }
+}
+savetoLS()
+
+
   
   return (
     <div>
@@ -56,8 +86,8 @@ const Navbar = () => {
             className="typing"
              
            />
-          <div className="button">
-            <button onClick={handleAdd}>ADD</button>
+          <div >
+            <button onClick={handleAdd} className="button">ADD</button>
           </div>
         </div>
         
@@ -69,9 +99,10 @@ const Navbar = () => {
           
             return<div >
           
-          <div className="btns">
-          <button onClick={(e)=>handleEdit(e,item.id)} className="btn1" >Edit</button>
-          <button onClick={()=>{handleRemove(item.id)}} className="btn2">Remove </button>
+          <div className="btns" key={item.id}>
+          <button onClick={(e)=>handleEdit(e,item.id)} className="button" >Edit</button>
+          <button onClick={()=>{handleRemove(item.id)}} className="button" >Remove </button>
+          
           <div className="printedTodo" >{item.todo} 
           
           </div>
