@@ -12,23 +12,28 @@ const Navbar = () => {
   const [editTab, seteditTab] = useState(null);
 
   useEffect(() => {
-    let todos = JSON.parse(localStorage.setItem("todos"))
-    settodo(todos)
-  }, []);  
+    const storedtodos = localStorage.getItem("todos")
+    console.log(storedtodos)
+    if(storedtodos){
+    settodos(JSON.parse(storedtodos))
+    }}, []);    
+ 
   
-  let savetoLS = localStorage.setItem("todos",JSON.stringify(todos))
+  useEffect(() => {
+    localStorage.setItem("todos",JSON.stringify(todos))
+  }, [todos]); 
 
   let handleEdit=(e,id)=>{
     
         let t =todos.find((i)=>i.id===id)
       if(t){
         settodo(t.todo)
-       seteditTab(id)
+       seteditTab(id) 
     
       } 
      
   }
-  savetoLS()
+
 
   let handleAdd=()=>{
     if(todo.trim()===""){
@@ -52,7 +57,7 @@ const Navbar = () => {
     }
    settodo("")
   };
-  savetoLS()
+
 
   let handleRemove=(id)=>{
       todos.findIndex(item=>{
@@ -66,8 +71,6 @@ const Navbar = () => {
     
     }
 }
-savetoLS()
-
 
   
   return (
@@ -97,9 +100,9 @@ savetoLS()
           
           {todos.map(item=>{
           
-            return<div >
+            return<div key={item.id} >
           
-          <div className="btns" key={item.id}>
+          <div className="btns" >
           <button onClick={(e)=>handleEdit(e,item.id)} className="button" >Edit</button>
           <button onClick={()=>{handleRemove(item.id)}} className="button" >Remove </button>
           
