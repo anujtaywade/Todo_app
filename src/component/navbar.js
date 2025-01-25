@@ -12,16 +12,18 @@ const Navbar = () => {
   const [editTab, seteditTab] = useState(null);
 
   useEffect(() => {
-    const storedtodos = localStorage.getItem("todos")
+      const storedtodos = localStorage.getItem("todos")
     console.log(storedtodos)
-    if(storedtodos){
     settodos(JSON.parse(storedtodos))
-    }}, []);    
+  }, []);    
  
   
   useEffect(() => {
+    console.log(todos)
     localStorage.setItem("todos",JSON.stringify(todos))
   }, [todos]); 
+
+  
 
   let handleEdit=(e,id)=>{
     
