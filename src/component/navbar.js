@@ -12,15 +12,21 @@ const Navbar = () => {
   const [editTab, seteditTab] = useState(null);
 
   useEffect(() => {
+     const getlocalStorage=()=>{
       const storedtodos = localStorage.getItem("todos")
-    console.log(storedtodos)
-    settodos(JSON.parse(storedtodos))
+      console.log(storedtodos)
+      settodos(JSON.parse(storedtodos))
+      getlocalStorage()
+    }
   }, []);    
  
   
   useEffect(() => {
-    console.log(todos)
+    const setlocalStorage=()=>{
+      console.log(todos)
     localStorage.setItem("todos",JSON.stringify(todos))
+    }
+    setlocalStorage()
   }, [todos]); 
 
   
