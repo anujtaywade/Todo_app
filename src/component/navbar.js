@@ -5,36 +5,28 @@ const Navbar = () => {
   const [change, setchange] = useState({ name: "" });
   let handleChange = (e) => {
     settodo(e.target.value)
-  };
+  };  
 
   const [todo, settodo] = useState("");
   const [todos, settodos] = useState([]);
   const [editTab, seteditTab] = useState(null);
 
-  const getlocalStorage=()=>{
-    const storedtodos = localStorage.getItem("todos")
-      console.log(storedtodos)
-      settodos(JSON.parse(storedtodos))
-  }
-  
   useEffect(() => {
-      
-      getlocalStorage()
-
-  }, []);    
+    
+      const storedtodos = localStorage.getItem("todos")
+        console.log(storedtodos)
+        settodos(JSON.parse(storedtodos))
+        
+  }, []); 
  
+    const setlocalstorage=()=>{
+      console.log(todos)
+      localStorage.setItem("todos",JSON.stringify(todos))
+    }
+   setlocalstorage()
+    
+
   
-  const setlocalStorage=()=>{
-    
-    console.log(todos)
-    localStorage.setItem("todos",JSON.stringify(todos))
-    
-  }
-  
-  useEffect(() => {
-    
-    setlocalStorage()
-  }, [todos]); 
 
   
 
