@@ -23,7 +23,7 @@ const Navbar = () => {
       console.log(todos)
       localStorage.setItem("todos",JSON.stringify(todos))
     }
-   setlocalstorage()
+   
     
 
   
@@ -56,6 +56,7 @@ const Navbar = () => {
         settodos(updatedtodos)
         seteditTab(null);
         console.log(updatedtodos)
+        
     } 
 
      else {
@@ -63,8 +64,9 @@ const Navbar = () => {
       settodos([...todos, newTodo]);
     }
    settodo("")
+   setlocalstorage()
   };
-
+  
 
   let handleRemove=(id)=>{
       todos.findIndex(item=>{
