@@ -2,7 +2,6 @@ import React, {  useEffect } from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 const Navbar = () => {
-  const [change, setchange] = useState({ name: "" });
   let handleChange = (e) => {
     settodo(e.target.value)
   };  
@@ -19,10 +18,12 @@ const Navbar = () => {
         
   }, []); 
  
+  
     const setlocalstorage=()=>{
       console.log(todos)
       localStorage.setItem("todos",JSON.stringify(todos))
     }
+ 
    
     
 
@@ -55,7 +56,7 @@ const Navbar = () => {
         )
         settodos(updatedtodos)
         seteditTab(null);
-        console.log(updatedtodos)
+       
         
     } 
 
@@ -63,8 +64,9 @@ const Navbar = () => {
       let newTodo = { id: uuidv4(), todo, isCompleted: false };
       settodos([...todos, newTodo]);
     }
-   settodo("")
+  settodo("");
    setlocalstorage()
+   
   };
   
 
