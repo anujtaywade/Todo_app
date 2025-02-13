@@ -1,138 +1,112 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 const Navbar = () => {
   let handleChange = (e) => {
-    settodo(e.target.value)
-  };  
+    settodo(e.target.value);
+  };
 
   const [todo, settodo] = useState("");
   const [todos, settodos] = useState([]);
   const [editTab, seteditTab] = useState(null);
 
   useEffect(() => {
-    
-      const storedtodos = localStorage.getItem("todos")
-        console.log(storedtodos)
-        settodos(JSON.parse(storedtodos))
-        
-  }, []); 
- 
-  
-    const setlocalstorage=()=>{
-      console.log(todos)
-      localStorage.setItem("todos",JSON.stringify(todos))
+    const storedtodos = localStorage.getItem("todos");
+    if (storedtodos) {
+      settodos(JSON.parse(storedtodos));
     }
- 
-   
-    
+  }, []);
 
-  
+  let handleEdit = (e, id) => {
+    let t = todos.find((i) => i.id === id);
+    if (t) {
+      settodo(t.todo);
+      seteditTab(id);
+    }
+  };
 
-  
-
-  let handleEdit=(e,id)=>{
-    
-        let t =todos.find((i)=>i.id===id)
-      if(t){
-        settodo(t.todo)
-       seteditTab(id) 
-    
-      } 
-     
-  }
-
-
-  let handleAdd=()=>{
-    if(todo.trim()===""){
-      alert("todos can't be empty")
+  let handleAdd = () => {
+    if (todo.trim() === "") {
+      alert("todos can't be empty");
       return;
     }
-   
-    
-    if(editTab!==null){
-    let updatedtodos=todos.map((item)=>
-          item.id===editTab?{...item,todo}:item
-        )
-        settodos(updatedtodos)
-        seteditTab(null);
-       
-        
-    } 
 
-     else {
-      let newTodo = { id: uuidv4(), todo, isCompleted: false };
-      settodos([...todos, newTodo]);
+    if (editTab !== null) {
+      const updatedtodos = todos.map((item) =>
+        item.id === editTab ? { ...item, todo } : item
+      );
+      settodos(updatedtodos);
+      localStorage.setItem("todos", JSON.stringify(updatedtodos));
+      seteditTab(null);
+    } else {
+      const newTodo = { id: uuidv4(), todo, isCompleted: false };
+      const newTodos = [...todos, newTodo];
+      settodos(newTodos);
+      localStorage.setItem("todos", JSON.stringify(newTodos));
     }
-  settodo("");
-   setlocalstorage()
-   
+    settodo("");
   };
-  
 
-  let handleRemove=(id)=>{
-      todos.findIndex(item=>{
-      return item.id ===id;
-      
-    })
-    let confirm=window.confirm("do you really want to delete this todo")
-    if(confirm){
-      let finalTodoos=todos.filter((item)=>item.id!==id);
-      settodos(finalTodoos)
-    
+  let handleRemove = (id) => {
+    let confirm = window.confirm("do you really want to delete this todo");
+    if (confirm) {
+      const finalTodos = todos.filter((item) => item.id !== id);
+      settodos(finalTodos);
+      localStorage.setItem("todos", JSON.stringify(finalTodos));
     }
-}
+  };
 
-  
   return (
     <div>
       <div className="container">
         <div className="title">Todo App</div>
 
         <div className="addup">
-          <input onChange={handleChange}
+          <input
+            onChange={handleChange}
             type="text"
-            
             name="text"
             value={todo}
-            
             placeholder="Enter Title"
             className="typing"
-             
-           />
-          <div >
-            <button onClick={handleAdd} className="button">ADD</button>
+          />
+          <div>
+            <button onClick={handleAdd} className="button">
+              ADD
+            </button>
           </div>
         </div>
-        
+
         <div>
-        
           <div className="mytodos">My Todos</div>
-          
-          {todos.map(item=>{
-          
-            return<div key={item.id} >
-          
-          <div className="btns" >
-          <button onClick={(e)=>handleEdit(e,item.id)} className="button" >Edit</button>
-          <button onClick={()=>{handleRemove(item.id)}} className="button" >Remove </button>
-          
-          <div className="printedTodo" >{item.todo} 
-          
-          </div>
-          
-          </div>
-          
 
-        
-        
-        </div>  
+          {todos &&
+            todos.map((item) => {
+              return (
+                <div key={item.id}>
+                  <div className="btns">
+                    <button
+                      onClick={(e) => handleEdit(e, item.id)}
+                      className="button"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleRemove(item.id);
+                      }}
+                      className="button"
+                    >
+                      Remove{" "}
+                    </button>
+
+                    <div className="printedTodo">{item.todo}</div>
+                  </div>
+                </div>
+              );
             })}
-
-
-          </div>
+        </div>
       </div>
-      
     </div>
   );
 };
