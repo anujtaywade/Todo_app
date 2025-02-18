@@ -1,10 +1,11 @@
 .container{
-  background-color:white   ;
+  background-color:white;
   color: aliceblue;
   padding: 15px;
   text-align: center;
   font-size: 25px;
   height:1000px;
+  text-align: center;
 }
 
 .typing{
@@ -14,50 +15,58 @@
   text-align: center;
   margin: 40px;
   border-radius: 40px;
-  /* margin-left: 220px; */
   
-  
- 
 }
 
-.btns{
-
+.addup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 600px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.addup{
-  box-shadow: 3px 3px 20px rgba(0,0,0,0.3);
-  padding-bottom: 3px;
-  margin-left: 300px;
-  margin-right: 300px;
-  margin-top: 10px;
-  background-color: white ;
-  
+.addup:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 .title{
   background-color: blueviolet;
-  
-  margin-left: 300px;
-  margin-right: 300px;
+  border-radius: 10px;
+  margin-left: 425px;
+  margin-right: 425px;
 }
 
 
 
-.mytodos{
-  margin-right: 300px;
-  margin-left: 300px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+.mytodos {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 15px;
+  text-align: center;
   color: black;
-  padding-right: 40%;
-  background-color: white ;
-  box-shadow: 1px 1px 2px 1px  black;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
 }
+
 
 .printedTodo{
+  display:contents;
+  
   padding-left: 363px;
   padding-right: 300px;
-  text-align: start;
+  text-align:center;
   color: black;
   padding-bottom: 10px;
   
@@ -70,3 +79,5 @@
   font-size: 15px;
   margin-bottom: 10px;
 }
+
+.{}

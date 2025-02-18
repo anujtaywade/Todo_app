@@ -32,7 +32,7 @@ const Navbar = () => {
     }
 
     if (editTab !== null) {
-      const updatedtodos = todos.map((item) =>
+      const updatedtodos =  todos.map((item) =>
         item.id === editTab ? { ...item, todo } : item
       );
       settodos(updatedtodos);
