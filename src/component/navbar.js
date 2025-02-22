@@ -71,7 +71,7 @@ const Navbar = () => {
             className="typing"
           />
           <div>
-            <button onClick={handleAdd} className="button">
+            <button onClick={handleAdd} className="addButton">
               ADD
             </button>
           </div>
@@ -83,11 +83,11 @@ const Navbar = () => {
           {todos &&
             todos.map((item) => {
               return (
-                <div key={item.id}>
-                  <div className="btns">
+                <div key={item.id} className="printedTodo">
+                  
                     <button
                       onClick={(e) => handleEdit(e, item.id)}
-                      className="button"
+                      className="editButton"
                     >
                       Edit
                     </button>
@@ -95,13 +95,13 @@ const Navbar = () => {
                       onClick={() => {
                         handleRemove(item.id);
                       }}
-                      className="button"
+                      className="removeButton"
                     >
                       Remove{" "}
                     </button>
-
-                    <div className="printedTodo">{item.todo}</div>
-                  </div>
+                    
+                    <div >{item.todo}</div>
+                  
                 </div>
               );
             })}
