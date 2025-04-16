@@ -1,7 +1,7 @@
 import './App.css';
 import Navbar from './component/navbar'
 import Edit from './component/edit';
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 function App() {
 let router = createBrowserRouter([
   {
@@ -14,6 +14,7 @@ let router = createBrowserRouter([
     <div>
       <Navbar></Navbar>
       <Edit/>
+      <RouterProvider router ={router}/>
     </div>
   );
 }
